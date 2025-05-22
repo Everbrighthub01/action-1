@@ -12,8 +12,8 @@ jobs:
             - name: Install Cowsay
               run: sudo apt-get install cowsay -y
 
-            - name: Execute cowsay CMD
-              run: cowsay -f dragon "Run for cover , ${{env.MESSAGE}}" >> dragon.txt
+            - name: Execute cowsay CMD using secret
+              run: cowsay -f dragon "Run for cover , ${{ secrets.SECRET_MESSAGE }}" >> dragon.txt
 
             - name: Upload Dragon text file
               uses: actions/upload-artifact@v4
