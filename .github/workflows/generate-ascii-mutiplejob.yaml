@@ -6,12 +6,14 @@ jobs:
     build_job:
         runs-on: ubuntu-latest
         name: Build Job
+        env:
+          MESSAGE: I am a dragon REUUUE
         steps:
             - name: Install Cowsay
               run: sudo apt-get install cowsay -y
 
             - name: Execute cowsay CMD
-              run: cowsay -f dragon "Run for cover , I am a dragon REUUUE" >> dragon.txt
+              run: cowsay -f dragon "Run for cover , ${{env.MESSAGE}}" >> dragon.txt
 
             - name: Upload Dragon text file
               uses: actions/upload-artifact@v4
