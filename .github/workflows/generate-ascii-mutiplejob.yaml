@@ -1,0 +1,45 @@
+name: Generate with multiple Job
+
+on: push
+
+jobs:
+    build_job:
+        runs-on: ubuntu-latest
+        name: Build Job
+        steps:
+            - name: Install Cowsay
+              run: sudo apt-get install cowsay -y
+
+            - name: Execute cowsay CMD
+              run: cowsay -f dragon "Run for cover , I am a dragon REUUUE" >> dragon.txt
+
+            - name: Upload Dragon text file
+              uses: actions/upload-artifact@v4
+              with:
+                name: dragon-text-file
+                path: dragon.txt
+
+    test_job:
+        runs-on: ubuntu-latest
+        name: Test Job
+        needs: build_job
+        steps:
+            - uses: actions/download-artifact@v4
+              with:
+                name: dragon-text-file
+
+            - name: Test file exist
+              run: grep -i "dragon" dragon.txt
+
+
+    deplo_job:
+        runs-on: ubuntu-latest
+        name: Deploy Job
+        needs: test_job
+        steps:
+            - uses: actions/download-artifact@v4
+              with:
+                name: dragon-text-file
+
+            - name: Read File
+              run: cat dragon.txt
