@@ -1,8 +1,8 @@
 name: Generate with multiple Job
 
-on: 
+on:
   schedule:
-    - cron: "* * * * *"
+    - cron: '*/2 * * * *'
 
 jobs:
     build_job:
