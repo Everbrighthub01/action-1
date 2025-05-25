@@ -28,6 +28,9 @@ jobs:
         runs-on: ubuntu-latest
         name: Test Job
         needs: build_job
+        concurrency: 
+          group: test-deploy
+          cancel-in-progress: true
         steps:
             - uses: actions/download-artifact@v4
               with:
