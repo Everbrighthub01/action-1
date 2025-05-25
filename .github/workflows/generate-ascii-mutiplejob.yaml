@@ -26,6 +26,7 @@ jobs:
 
     test_job:
         runs-on: ubuntu-latest
+        timeout-minutes: 1
         name: Test Job
         needs: build_job
         concurrency: 
@@ -38,6 +39,9 @@ jobs:
 
             - name: Test file exist
               run: grep -i "dragon" dragon.txt
+
+            - name: Sleep 200 second
+              run: sleep 200
 
 
     deplo_job:
