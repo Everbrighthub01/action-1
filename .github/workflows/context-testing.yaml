@@ -1,0 +1,14 @@
+name: Context Testing
+
+on: 
+  push:
+
+jobs:
+    dump_context_tolog:
+        runs-on: ubuntu-latest
+        name: Dump context to log
+        steps:
+          - name: Dump github context
+            env:
+                GITHUB_CONTEXT: ${{ toJson(github) }}
+            run: echo "$GITHUB_CONTEXT"
